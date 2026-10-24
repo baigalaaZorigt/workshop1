@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Захиалга · Cashmere Mongolia{% endblock %}
+{% block content %}
+<h1>Захиалга</h1>
+<p class="sub">Бүх захиалга, шинэ нь дээрээ. "Дансанд орсон" гэдэг нь банкны хуулгад төлбөр нь олдсон гэсэн үг.</p>
+
+<form class="filters" method="get">
+  <input type="search" name="q" value="{{ q }}" placeholder="Хайх: нэр, бараа, дугаар…">
+  <select name="status" onchange="this.form.submit()">
+    <option value="">Бүх төлөв</option>
+    {% for s in statuses %}<option {{ 'selected' if s == status }}>{{ s }}</option>{% endfor %}
+  </select>
+</form>
+
+{% if rows %}
+<p class="summary">{{ rows|length }} захиалга · нийт {{ total|mnt }}</p>
+<div class="card table-card">
+<table class="responsive">
+  <thead><tr>
+    <th>Захиалга</th><th>Харилцагч</th><th>Бараа</th><th class="num">Нийт</th><th>Төлбөр</th><th>Төлөв</th>
+  </tr></thead>
+  <tbody>
+  {% for r in rows %}
+  <tr>
+    <td><strong>{{ r.order_id }}</strong><div class="muted">{{ r.order_date }} · {{ r.channel }}</div></td>
+    <td class="num-sm">{{ r.customer }}<div class="muted">{{ r.district }}</div></td>
+    <td>{{ r.product }} × {{ r.quantity }}<div class="muted">{{ r.unit_price|mnt }}{% if r.delivery_fee %} + хүргэлт {{ r.delivery_fee|mnt }}{% endif %}</div></td>
+    <td class="num"><strong>{{ r.total|mnt }}</strong></td>
+    <td>{{ r.payment_method }}
+      {% if r.payment_method in ('Данс', 'QPay') %}
+        <div class="paid {{ '' if r.paid_in_bank else 'no' }}">{{ '✓ Дансанд орсон' if r.paid_in_bank else 'Дансанд олдоогүй' }}</div>
+      {% endif %}
+    </td>
+    <td class="num-sm">
+      {% set cls = 'ok' if r.status == 'Хүргэгдсэн' else ('cancel' if r.status == 'Цуцлагдсан' else 'wait') %}
+      <span class="pill {{ cls }}">{{ r.status }}</span>
+    </td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% else %}
+<div class="card empty">
+  Захиалга алга. <a href="{{ url_for('upload') }}">Excel оруулах</a> хэсгээс zahialga.xlsx-ээ оруулна уу.
+</div>
+{% endif %}
+{% endblock %}

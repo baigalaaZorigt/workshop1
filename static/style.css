@@ -1,0 +1,191 @@
+/* Cashmere Mongolia — Visual Brand Book V1-ийн өнгө, фонт */
+:root {
+  --primary: #371D12;    /* Dark brown */
+  --secondary: #74482C;  /* Mid brown */
+  --accent: #C6B6A9;     /* Warm taupe */
+  --neutral: #F7F4F0;
+  --surface: #FFFFFF;
+  --muted: #8A6F5E;
+  --line: #E4DAD1;
+  --ok-bg: #EEF3EA;  --ok: #3F6B34;
+  --err-bg: #F8E9E4; --err: #9A3B22;
+  --radius: 14px;
+  --font: "Montserrat", system-ui, sans-serif;
+  --script: "Great Vibes", "Bickham Script Pro", cursive;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--neutral); color: var(--primary);
+  font-family: var(--font); font-size: 15px; line-height: 1.55;
+}
+a { color: var(--secondary); }
+h1 { font-weight: 500; font-size: 22px; letter-spacing: .02em; margin: 0 0 4px; }
+h2 { font-weight: 600; font-size: 12px; letter-spacing: .14em; text-transform: uppercase;
+     color: var(--secondary); margin: 0 0 14px; }
+.sub { color: var(--muted); font-size: 13px; margin: 0 0 22px; }
+
+/* ---- Толгой хэсэг ---- */
+.topbar {
+  position: sticky; top: 0; z-index: 10; background: rgba(247,244,240,.94);
+  backdrop-filter: blur(6px); border-bottom: 1px solid var(--line);
+}
+.topbar-inner { max-width: 1080px; margin: 0 auto; padding: 10px 16px;
+  display: flex; align-items: center; gap: 24px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--primary); }
+.brand img { height: 52px; width: auto; }
+.brand span { font-size: 11px; letter-spacing: .22em; font-weight: 600; }
+.nav { display: flex; gap: 4px; margin-left: auto; }
+.nav a { display: flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px;
+  text-decoration: none; color: var(--secondary); font-size: 13px; font-weight: 500; }
+.nav a:hover { background: #EFE8E1; }
+.nav a.active { background: var(--primary); color: var(--neutral); }
+.nav svg { width: 18px; height: 18px; flex: none; }
+.logout button { background: none; border: 0; color: var(--muted); font: inherit; font-size: 12px; cursor: pointer; padding: 6px; }
+.logout button:hover { color: var(--primary); }
+
+main { max-width: 1080px; margin: 0 auto; padding: 28px 16px 48px; }
+
+/* ---- Карт, товч, форм ---- */
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 44px; padding: 0 22px; border-radius: 999px; border: 1px solid var(--primary);
+  background: var(--primary); color: var(--neutral); font: 500 14px var(--font); cursor: pointer; text-decoration: none; }
+.btn:hover { background: var(--secondary); border-color: var(--secondary); }
+.btn.secondary { background: transparent; color: var(--primary); }
+.btn.secondary:hover { background: #EFE8E1; }
+label { display: block; font-size: 12px; font-weight: 600; letter-spacing: .06em; color: var(--secondary); margin-bottom: 6px; }
+input[type=email], input[type=password], input[type=search], select, textarea {
+  width: 100%; min-height: 44px; padding: 10px 14px; border: 1px solid var(--accent); border-radius: 10px;
+  background: var(--surface); color: var(--primary); font: 15px var(--font); }
+textarea { min-height: 96px; resize: vertical; }
+input:focus, select:focus, textarea:focus { outline: 2px solid var(--secondary); outline-offset: 1px; border-color: transparent; }
+
+.flash { padding: 12px 16px; border-radius: 10px; margin-bottom: 18px; font-size: 14px; }
+.flash.success { background: var(--ok-bg); color: var(--ok); }
+.flash.error { background: var(--err-bg); color: var(--err); }
+
+/* ---- Нэвтрэх ---- */
+.login-page { min-height: 100vh; display: grid; place-items: center; padding: 24px 16px; }
+.login-box { width: 100%; max-width: 380px; text-align: center; }
+.login-box img { width: 150px; height: auto; margin-bottom: 8px; }
+.login-box .script { font-family: var(--script); font-size: 34px; color: var(--secondary); margin: 0 0 22px; line-height: 1.2; }
+.login-box form { text-align: left; display: grid; gap: 16px; }
+.login-box .btn { width: 100%; margin-top: 4px; }
+
+/* ---- Excel оруулах ---- */
+.drop { display: grid; place-items: center; gap: 10px; text-align: center; padding: 36px 20px;
+  border: 1.5px dashed var(--accent); border-radius: var(--radius); background: var(--surface); cursor: pointer; }
+.drop:hover, .drop.drag { border-color: var(--secondary); background: #FBF9F6; }
+.drop input { display: none; }
+.drop .fname { font-size: 13px; color: var(--muted); }
+.drop svg { width: 34px; height: 34px; color: var(--secondary); }
+.hints { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 20px; }
+.hints p { margin: 0; font-size: 13px; color: var(--muted); }
+
+/* ---- Захиалга ---- */
+.filters { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
+.filters input { flex: 1 1 200px; }
+.filters select { flex: 0 1 220px; }
+.summary { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th { text-align: left; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
+  font-weight: 600; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+td { padding: 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+td.num, th.num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+tr:last-child td { border-bottom: 0; }
+.muted { color: var(--muted); font-size: 12px; }
+.pill { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 12px; font-weight: 500;
+  border: 1px solid var(--accent); white-space: nowrap; }
+.pill.ok { background: var(--ok-bg); color: var(--ok); border-color: transparent; }
+.pill.wait { background: #FBF1DF; color: #7A5414; border-color: transparent; }
+.pill.cancel { background: #F1ECE8; color: var(--muted); border-color: transparent; text-decoration: line-through; }
+.paid { font-size: 12px; color: var(--ok); white-space: nowrap; }
+.paid.no { color: var(--muted); }
+.empty { text-align: center; padding: 40px 20px; color: var(--muted); }
+
+/* ---- Тайлан ---- */
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-bottom: 24px; }
+.tile .label { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.tile .value { font-size: 24px; font-weight: 500; margin-top: 6px; font-variant-numeric: tabular-nums; }
+.tile .note { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-bottom: 16px; }
+.bars { display: grid; gap: 12px; }
+.bar-row { position: relative; }
+.bar-head { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; margin-bottom: 4px; }
+.bar-head .v { font-variant-numeric: tabular-nums; color: var(--primary); font-weight: 500; }
+.bar-track { height: 10px; background: #F1ECE8; border-radius: 4px; }
+.bar-fill { height: 100%; background: var(--secondary); border-radius: 0 4px 4px 0; min-width: 2px; }
+.bar-row:hover .bar-fill { background: var(--primary); }
+
+/* ---- AI ---- */
+.ai-form { display: grid; gap: 12px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { border: 1px solid var(--accent); background: var(--surface); color: var(--secondary); border-radius: 999px;
+  padding: 8px 14px; font: 13px var(--font); cursor: pointer; text-align: left; }
+.chip:hover { border-color: var(--secondary); }
+.answer { white-space: pre-wrap; margin-top: 20px; }
+.answer .q { font-weight: 600; margin-bottom: 10px; }
+.loading { display: none; color: var(--muted); font-size: 13px; }
+form.busy .loading { display: block; }
+
+/* ---- Нүүр ---- */
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.home-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
+.home-head select { width: auto; min-width: 200px; }
+.hero { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 16px; }
+.hero-tile { padding: 24px; }
+.hero-tile .label { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.hero-tile .value { font-size: clamp(26px, 3.4vw, 36px); font-weight: 500; margin-top: 8px; line-height: 1.15;
+  font-variant-numeric: tabular-nums; }
+.hero-tile .note { font-size: 12px; color: var(--muted); margin-top: 6px; }
+.hero-tile.profit { background: var(--primary); border-color: var(--primary); color: var(--neutral); }
+.hero-tile.profit .label, .hero-tile.profit .note { color: var(--accent); }
+.hero-tile.profit.loss .value::after { content: " алдагдал"; font-size: 13px; color: var(--accent); }
+
+.columns { display: flex; align-items: stretch; gap: 10px; height: 260px; padding-top: 8px; }
+.col { position: relative; flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: center; outline: none; }
+.col-value { font-size: 12px; font-weight: 500; font-variant-numeric: tabular-nums; margin-bottom: 4px; white-space: nowrap; }
+.col-area { flex: 1; width: 100%; display: flex; align-items: flex-end; justify-content: center; border-bottom: 1px solid var(--accent); }
+.col-bar { width: min(56px, 100%); background: var(--secondary); border-radius: 4px 4px 0 0; min-height: 2px; transition: background .12s; }
+.col:hover .col-bar, .col:focus .col-bar { background: var(--primary); }
+.col-name { font-size: 11px; color: var(--secondary); text-align: center; margin-top: 8px; line-height: 1.3; min-height: 2.6em; overflow-wrap: anywhere; }
+.col-tip { position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); background: var(--primary); color: var(--neutral);
+  font-size: 12px; padding: 5px 10px; border-radius: 8px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .12s; z-index: 2; }
+.col:hover .col-tip, .col:focus .col-tip { opacity: 1; }
+.col:first-child .col-tip { left: 0; transform: none; }
+.col:last-child .col-tip { left: auto; right: 0; transform: none; }
+
+/* ---- Утас ---- */
+@media (max-width: 760px) {
+  /* backdrop-filter байвал fixed цэс толгой дотор "гацдаг" тул утсан дээр унтраана */
+  .topbar { backdrop-filter: none; background: var(--neutral); }
+  .topbar-inner { padding: 8px 16px; }
+  .brand img { height: 46px; }
+  .nav { position: fixed; bottom: 0; left: 0; right: 0; margin: 0; justify-content: space-around;
+    background: var(--surface); border-top: 1px solid var(--line); padding: 6px 4px calc(6px + env(safe-area-inset-bottom)); }
+  .nav a { flex-direction: column; gap: 2px; padding: 6px 4px; font-size: 11px; border-radius: 10px; flex: 1; }
+  .nav a.active { background: transparent; color: var(--primary); font-weight: 600; }
+  .nav a.active svg { color: var(--primary); }
+  .logout { margin-left: auto; }
+  main { padding: 20px 16px 96px; }
+  h1 { font-size: 20px; }
+  .hero { grid-template-columns: 1fr; gap: 10px; }
+  .hero-tile { padding: 18px 20px; }
+  .home-head form, .home-head select { width: 100%; }
+  .home-head form { margin: -8px 0 16px; }
+  .columns { gap: 4px; height: 230px; }
+  .col-value { font-size: 10px; }
+  .col-name { font-size: 10px; }
+
+  /* Захиалгын хүснэгт утсан дээр карт болно */
+  table.responsive thead { display: none; }
+  table.responsive, table.responsive tbody, table.responsive tr, table.responsive td { display: block; width: 100%; }
+  table.responsive tr { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 14px 16px; margin-bottom: 10px; display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; }
+  table.responsive td { border: 0; padding: 0; }
+  table.responsive td.num { text-align: right; }
+  table.responsive td.hide-sm { display: none; }
+  .table-card { background: transparent; border: 0; padding: 0; }
+}

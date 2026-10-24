@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Нэвтрэх · Cashmere Mongolia{% endblock %}
+{% block body %}
+<div class="login-page">
+  <div class="login-box">
+    <img src="{{ url_for('static', filename='logo.svg') }}" alt="Cashmere Mongolia">
+    <p class="script">Quiet luxury</p>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for cat, msg in messages %}<div class="flash {{ cat }}">{{ msg }}</div>{% endfor %}
+    {% endwith %}
+    {% if not configured %}
+      <div class="flash error">.env файлд SUPABASE_URL болон SUPABASE_SECRET_KEY-г бөглөөд апп-аа дахин асаана уу.</div>
+    {% endif %}
+    <form method="post" class="card">
+      <div>
+        <label for="email">И-мэйл</label>
+        <input id="email" name="email" type="email" autocomplete="email" required value="{{ email or '' }}">
+      </div>
+      <div>
+        <label for="password">Нууц үг</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" required>
+      </div>
+      <button class="btn" type="submit">Нэвтрэх</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

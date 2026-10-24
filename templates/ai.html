@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}AI туслах · Cashmere Mongolia{% endblock %}
+{% block content %}
+<h1>AI туслах</h1>
+<p class="sub">Захиалга, дансны хуулгынхаа талаар монголоор асуугаарай. AI таны өгөгдлийг уншиж хариулна.</p>
+
+<form method="post" class="card ai-form" id="ai-form">
+  <textarea name="question" id="question" placeholder="Жишээ нь: Энэ сард хамгийн их зарагдсан бараа юу вэ?" required>{{ question }}</textarea>
+  <div class="chips">
+    {% for s in ['Энэ сарын ашиг хэд вэ?', 'Аль суваг хамгийн их борлуулалт авчирсан бэ?',
+                 'Зарлагаа хаана хэмнэж болох вэ?', 'Хэн хамгийн олон удаа захиалсан бэ?'] %}
+      <button type="button" class="chip" onclick="document.getElementById('question').value=this.textContent">{{ s }}</button>
+    {% endfor %}
+  </div>
+  <div><button class="btn" type="submit">Асуух</button></div>
+  <p class="loading">Бодож байна… 10–30 секунд болж магадгүй.</p>
+
+  {% if answer %}
+  <div class="answer"><div class="q">{{ question }}</div>{{ answer }}</div>
+  {% endif %}
+</form>
+
+<script>
+  document.getElementById('ai-form').addEventListener('submit', e => e.target.classList.add('busy'));
+</script>
+{% endblock %}

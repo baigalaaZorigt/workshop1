@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Нүүр · Cashmere Mongolia{% endblock %}
+{% block content %}
+<div class="home-head">
+  <div>
+    <h1>Сарын тойм</h1>
+    <p class="sub">Банкны дансаар орсон, гарсан мөнгөөр тооцсон.</p>
+  </div>
+  {% if months %}
+  <form method="get">
+    <label for="month" class="sr-only">Сар сонгох</label>
+    <select id="month" name="month" onchange="this.form.submit()">
+      {% for value, label in months %}<option value="{{ value }}" {{ 'selected' if value == month }}>{{ label }}</option>{% endfor %}
+    </select>
+    <noscript><button class="btn secondary" type="submit">Харах</button></noscript>
+  </form>
+  {% endif %}
+</div>
+
+{% if not s %}
+<div class="card empty">Дансны хуулга алга. <a href="{{ url_for('upload') }}">Excel оруулах</a> хэсгээс dansnii_huulga.xlsx-ээ оруулна уу.</div>
+{% else %}
+<div class="hero">
+  <div class="card hero-tile">
+    <div class="label">Орлого</div>
+    <div class="value">{{ s.income|mnt }}</div>
+    <div class="note">Дансаар орсон бүх мөнгө</div>
+  </div>
+  <div class="card hero-tile">
+    <div class="label">Бизнесийн зарлага</div>
+    <div class="value">{{ s.expense|mnt }}</div>
+    <div class="note">Хувийн, Хадгаламжийг оруулаагүй{% if s.excluded %} ({{ s.excluded|mnt }}){% endif %}</div>
+  </div>
+  <div class="card hero-tile profit {{ 'loss' if s.profit < 0 }}">
+    <div class="label">Бизнесийн ашиг</div>
+    <div class="value">{{ s.profit|mnt }}</div>
+    <div class="note">Орлого − бизнесийн зарлага</div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Бизнесийн зарлага · ангиллаар</h2>
+  {% if s.columns %}
+  <div class="columns" role="img" aria-label="Бизнесийн зарлага ангиллаар">
+    {% for c in s.columns %}
+    <div class="col" tabindex="0">
+      <span class="col-tip">{{ c.name }}: {{ c.amount|mnt }}</span>
+      <div class="col-value">{{ c.short }}</div>
+      <div class="col-area"><div class="col-bar" style="height: {{ c.height }}%"></div></div>
+      <div class="col-name">{{ c.name }}</div>
+    </div>
+    {% endfor %}
+  </div>
+  <table class="sr-only">
+    <tr><th>Ангилал</th><th>Дүн</th></tr>
+    {% for c in s.columns %}<tr><td>{{ c.name }}</td><td>{{ c.amount|mnt }}</td></tr>{% endfor %}
+  </table>
+  {% else %}
+  <p class="muted">Энэ сард бизнесийн зарлага алга.</p>
+  {% endif %}
+</div>
+{% endif %}
+{% endblock %}

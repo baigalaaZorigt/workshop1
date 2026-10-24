@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Тайлан · Cashmere Mongolia{% endblock %}
+
+{% macro bars(items) %}
+  {% set top = (items|map(attribute=1)|max) if items else 1 %}
+  <div class="bars">
+  {% for name, value in items %}
+    <div class="bar-row">
+      <div class="bar-head"><span>{{ name }}</span><span class="v">{{ value|mnt }}</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width: {{ (value / top * 100) if top else 0 }}%"></div></div>
+    </div>
+  {% endfor %}
+  </div>
+{% endmacro %}
+
+{% block content %}
+<h1>Тайлан</h1>
+<p class="sub">Цуцлагдсан захиалгыг борлуулалтад тооцоогүй.</p>
+
+{% if not r.has_data %}
+<div class="card empty">Өгөгдөл алга. <a href="{{ url_for('upload') }}">Excel оруулах</a> хэсгээс файлаа оруулна уу.</div>
+{% else %}
+<div class="tiles">
+  <div class="card tile"><div class="label">Борлуулалт</div><div class="value">{{ r.sales|mnt }}</div>
+    <div class="note">{{ r.order_count }} захиалга{% if r.cancelled %} · {{ r.cancelled }} цуцлагдсан{% endif %}</div></div>
+  <div class="card tile"><div class="label">Дансны орлого</div><div class="value">{{ r.income|mnt }}</div></div>
+  <div class="card tile"><div class="label">Дансны зарлага</div><div class="value">{{ r.expense|mnt }}</div></div>
+  <div class="card tile"><div class="label">Цэвэр урсгал</div><div class="value">{{ r.net|mnt }}</div>
+    <div class="note">орлого − зарлага</div></div>
+</div>
+
+<div class="grid2">
+  <div class="card"><h2>Борлуулалт · бараагаар</h2>{{ bars(r.by_product) }}</div>
+  <div class="card"><h2>Борлуулалт · сувгаар</h2>{{ bars(r.by_channel) }}</div>
+</div>
+<div class="grid2">
+  <div class="card"><h2>Зарлага · ангиллаар</h2>
+    {% if r.by_category %}{{ bars(r.by_category) }}{% else %}<p class="muted">Дансны хуулга оруулаагүй байна.</p>{% endif %}
+  </div>
+  <div class="card"><h2>Төлбөр нь дансанд олдоогүй ({{ r.unpaid|length }})</h2>
+    {% if r.unpaid %}
+    <table>
+      <tbody>
+      {% for o in r.unpaid %}
+        <tr><td><strong>{{ o.order_id }}</strong><div class="muted">{{ o.order_date }} · {{ o.customer }} · {{ o.payment_method }}</div></td>
+            <td class="num">{{ o.total|mnt }}</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {% else %}<p class="muted">Данс, QPay-ээр төлсөн бүх захиалгын мөнгө дансанд орсон байна.</p>{% endif %}
+  </div>
+</div>
+{% endif %}
+{% endblock %}

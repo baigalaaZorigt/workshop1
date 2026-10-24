@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Excel оруулах · Cashmere Mongolia{% endblock %}
+{% block content %}
+<h1>Excel оруулах</h1>
+<p class="sub">Захиалгын файл эсвэл банкны дансны хуулгаа оруулна. Апп аль нь болохыг өөрөө танина.</p>
+
+<form method="post" enctype="multipart/form-data" id="upload-form">
+  <label class="drop" id="drop">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4m0 0-4 4m4-4 4 4M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+    <strong>Файл сонгох</strong>
+    <span class="fname" id="fname">эсвэл энд чирж оруулна (.xlsx)</span>
+    <input type="file" name="file" id="file" accept=".xlsx">
+  </label>
+  <p style="margin-top:16px"><button class="btn" type="submit">Оруулах</button></p>
+</form>
+
+<div class="hints">
+  <div class="card">
+    <h2>Захиалга</h2>
+    <p>zahialga.xlsx: order_id, date, channel … status баганатай. Өмнө орсон дугаартай захиалгыг алгасна, давхардахгүй.</p>
+  </div>
+  <div class="card">
+    <h2>Дансны хуулга</h2>
+    <p>Банкнаас татсан хуулга. Огноо, өдрийн дүн, үлдэгдлийн мөрийг алгасна. Шинэ гүйлгээг OpenAI-аар ангилж, төлбөрийг захиалгатай нь холбоно. Өмнө орсон гүйлгээг дахин оруулахгүй.</p>
+  </div>
+</div>
+
+<script>
+  const input = document.getElementById('file'), drop = document.getElementById('drop'), fname = document.getElementById('fname');
+  input.addEventListener('change', () => { if (input.files[0]) fname.textContent = input.files[0].name; });
+  ['dragover', 'dragenter'].forEach(e => drop.addEventListener(e, ev => { ev.preventDefault(); drop.classList.add('drag'); }));
+  ['dragleave', 'drop'].forEach(e => drop.addEventListener(e, () => drop.classList.remove('drag')));
+  drop.addEventListener('drop', ev => { ev.preventDefault(); input.files = ev.dataTransfer.files; input.dispatchEvent(new Event('change')); });
+</script>
+{% endblock %}
